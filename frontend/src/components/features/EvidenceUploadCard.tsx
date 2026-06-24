@@ -3,6 +3,7 @@ import { Upload, X, CheckCircle2, Loader2 } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/hooks'
+import { API_BASE_URL } from '@/config'
 
 interface EvidenceUploadCardProps {
   caseId: string
@@ -76,7 +77,7 @@ export default function EvidenceUploadCard({
       formData.append('doc_name', docName)
       formData.append('file', file)
 
-      const response = await fetch('https://firassist-pro.onrender.com/api/evidence/upload', {
+      const response = await fetch(`${API_BASE_URL}/evidence/upload`, {
         method: 'POST',
         body: formData
       })

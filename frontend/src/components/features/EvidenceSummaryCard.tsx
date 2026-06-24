@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { FileText, Loader2, AlertCircle } from 'lucide-react'
+import { API_BASE_URL } from '@/config'
 
 interface EvidenceSummaryCardProps {
   caseId: string
@@ -21,13 +22,13 @@ export default function EvidenceSummaryCard({ caseId, crimeType }: EvidenceSumma
     setLoading(true)
     try {
       // 1. Fetch required documents
-      const docsResponse = await fetch(`https://firassist-pro.onrender.com/api/evidence/required-documents/${encodeURIComponent(crimeType)}`)
+      const docsResponse = await fetch(`${API_BASE_URL}/evidence/required-documents/${encodeURIComponent(crimeType)}`)
       const docsData = await docsResponse.json()
       const allDocs = [...(docsData.common_documents || []), ...(docsData.crime_specific_documents || [])]
       setRequiredDocs(allDocs)
 
       // 2. Fetch case evidence metadata
-      const evidenceResponse = await fetch(`https://firassist-pro.onrender.com/api/evidence/case/${caseId}`)
+      const evidenceResponse = await fetch(`${API_BASE_URL}/evidence/case/${caseId}`)
       const evidenceData = await evidenceResponse.json()
       setUploadedFiles(evidenceData.uploaded_files || [])
     } catch (err) {

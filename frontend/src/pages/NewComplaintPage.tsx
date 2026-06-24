@@ -17,6 +17,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Badge } from '@/components/ui/badge'
 import { useToast } from '@/hooks'
 import { cn } from '@/lib/utils'
+import { API_BASE_URL } from '@/config'
 
 export default function NewComplaintPage() {
   const navigate = useNavigate()
@@ -91,7 +92,7 @@ export default function NewComplaintPage() {
           formData.append('file', audioBlob, 'complaint.wav')
           formData.append('translate', 'true')
 
-          const response = await fetch('https://firassist-pro.onrender.com/api/forthright/transcribe', {
+          const response = await fetch(`${API_BASE_URL}/forthright/transcribe`, {
             method: 'POST',
             body: formData
           })
@@ -137,7 +138,7 @@ export default function NewComplaintPage() {
       const complaint = textComplaint || transcript
 
       const response = await fetch(
-        "https://firassist-pro.onrender.com/api/generate-fir",
+        `${API_BASE_URL}/generate-fir`,
         {
           method: "POST",
           headers: {

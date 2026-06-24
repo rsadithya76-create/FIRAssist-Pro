@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { ClipboardCheck, CheckCircle2, Circle, Loader2 } from 'lucide-react'
+import { API_BASE_URL } from '@/config'
 
 interface CaseCompletenessCardProps {
   caseId: string
@@ -19,7 +20,7 @@ export default function CaseCompletenessCard({ caseId, crimeType, caseData }: Ca
         return
       }
       try {
-        const response = await fetch(`https://firassist-pro.onrender.com/api/evidence/case/${caseId}`)
+        const response = await fetch(`${API_BASE_URL}/evidence/case/${caseId}`)
         const data = await response.json()
         const uploaded = data.uploaded_files || []
         setEvidenceUploaded(uploaded.length > 0)

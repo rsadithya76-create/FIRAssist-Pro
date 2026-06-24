@@ -20,6 +20,7 @@ import { Badge } from '@/components/ui/badge'
 
 import { useToast } from '@/hooks'
 import { cn } from '@/lib/utils'
+import { API_BASE_URL } from '@/config'
 
 // Import the new metrics cards
 import EvidenceSummaryCard from '@/components/features/EvidenceSummaryCard'
@@ -66,7 +67,7 @@ export default function MissingInfoPage() {
       setCaseData(data)
 
       const nextFieldResponse = await fetch(
-        "https://firassist-pro.onrender.com/api/investigation/next-field",
+        `${API_BASE_URL}/investigation/next-field`,
         {
           method: "POST",
           headers: {
@@ -89,7 +90,7 @@ export default function MissingInfoPage() {
       }
 
       const response = await fetch(
-        "https://firassist-pro.onrender.com/api/investigation/next-question",
+        `${API_BASE_URL}/investigation/next-question`,
         {
           method: "POST",
           headers: {
@@ -117,7 +118,7 @@ export default function MissingInfoPage() {
 
     try {
       const response = await fetch(
-        "https://firassist-pro.onrender.com/api/investigation/submit-answer",
+        `${API_BASE_URL}/investigation/submit-answer`,
         {
           method: "POST",
           headers: {
@@ -153,7 +154,7 @@ export default function MissingInfoPage() {
       setAnswer("")
 
       const nextFieldResponse = await fetch(
-        "https://firassist-pro.onrender.com/api/investigation/next-field",
+        `${API_BASE_URL}/investigation/next-field`,
         {
           method: "POST",
           headers: {
@@ -176,7 +177,7 @@ export default function MissingInfoPage() {
       }
 
       const nextQuestionResponse = await fetch(
-        "https://firassist-pro.onrender.com/api/investigation/next-question",
+        `${API_BASE_URL}/investigation/next-question`,
         {
           method: "POST",
           headers: {

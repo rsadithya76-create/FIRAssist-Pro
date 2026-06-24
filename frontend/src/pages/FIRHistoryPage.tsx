@@ -18,6 +18,7 @@ import { Badge } from '@/components/ui/badge'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { formatDate } from '@/lib/utils'
 import type { ComplaintStatus } from '@/types'
+import { API_BASE_URL } from '@/config'
 
 const statusColors: Record<ComplaintStatus, string> = {
   'Draft': 'bg-secondary text-foreground',
@@ -39,7 +40,7 @@ export default function FIRHistoryPage() {
   useEffect(() => {
     async function loadData() {
       try {
-        const res = await fetch('https://firassist-pro.onrender.com/api/complaints?limit=200')
+        const res = await fetch(`${API_BASE_URL}/complaints?limit=200`)
         const data = await res.json()
         setComplaints(data.complaints || [])
       } catch (err) {

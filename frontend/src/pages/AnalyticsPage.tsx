@@ -26,6 +26,7 @@ import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import { useState, useEffect } from 'react'
+import { API_BASE_URL } from '@/config'
 
 const COLORS = ['#3B82F6', '#EF4444', '#F59E0B', '#10B981', '#8B5CF6', '#EC4899', '#6B7280']
 
@@ -36,7 +37,7 @@ export default function AnalyticsPage() {
   useEffect(() => {
     async function loadData() {
       try {
-        const res = await fetch('https://firassist-pro.onrender.com/api/dashboard/analytics')
+        const res = await fetch(`${API_BASE_URL}/dashboard/analytics`)
         const json = await res.json()
         setData(json)
       } catch (err) {

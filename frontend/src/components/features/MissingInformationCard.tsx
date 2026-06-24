@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { AlertTriangle, Info, CheckCircle } from 'lucide-react'
+import { API_BASE_URL } from '@/config'
 
 interface MissingInformationCardProps {
   caseId: string
@@ -19,11 +20,11 @@ export default function MissingInformationCard({ caseId, crimeType, caseData }: 
         return
       }
       try {
-        const docsResponse = await fetch(`https://firassist-pro.onrender.com/api/evidence/required-documents/${encodeURIComponent(crimeType)}`)
+        const docsResponse = await fetch(`${API_BASE_URL}/evidence/required-documents/${encodeURIComponent(crimeType)}`)
         const docsData = await docsResponse.json()
         const allDocs = [...(docsData.common_documents || []), ...(docsData.crime_specific_documents || [])]
 
-        const evidenceResponse = await fetch(`https://firassist-pro.onrender.com/api/evidence/case/${caseId}`)
+        const evidenceResponse = await fetch(`${API_BASE_URL}/evidence/case/${caseId}`)
         const evidenceData = await evidenceResponse.json()
         const uploaded = evidenceData.uploaded_files || []
 

@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { formatDateTime } from '@/lib/utils'
 import { useState, useEffect } from 'react'
+import { API_BASE_URL } from '@/config'
 
 export default function ActiveCasesPage() {
   const [complaints, setComplaints] = useState<any[]>([])
@@ -19,7 +20,7 @@ export default function ActiveCasesPage() {
   useEffect(() => {
     async function loadData() {
       try {
-        const res = await fetch('https://firassist-pro.onrender.com/api/complaints?limit=100')
+        const res = await fetch(`${API_BASE_URL}/complaints?limit=100`)
         const data = await res.json()
         setComplaints(data.complaints || [])
       } catch (err) {

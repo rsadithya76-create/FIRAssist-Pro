@@ -25,6 +25,7 @@ import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { API_BASE_URL } from '@/config'
 
 const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899']
@@ -77,11 +78,11 @@ export default function DashboardPage() {
   useEffect(() => {
     async function loadData() {
       try {
-        const statsRes = await fetch('https://firassist-pro.onrender.com/api/dashboard/stats')
+        const statsRes = await fetch(`${API_BASE_URL}/dashboard/stats`)
         const statsData = await statsRes.json()
         setStats(statsData)
 
-        const complaintsRes = await fetch('https://firassist-pro.onrender.com/api/complaints?limit=4')
+        const complaintsRes = await fetch(`${API_BASE_URL}/complaints?limit=4`)
         const complaintsData = await complaintsRes.json()
         setRecentComplaints(complaintsData.complaints || [])
       } catch (err) {
